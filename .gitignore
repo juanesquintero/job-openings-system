@@ -1,2 +1,6 @@
 __pycache__
 .env
+lib
+.pyc
+*.zip
+.DS_Store
