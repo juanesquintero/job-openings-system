@@ -11,3 +11,6 @@ alembic==1.13.1
 # Utils
 python-dotenv==1.0.1
 pydantic-settings==2.1.0
+
+# Deploy
+mangum==0.17.0
