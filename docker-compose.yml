@@ -40,7 +40,6 @@ services:
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4:8.2
-    restart: unless-stopped
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@${DB_SCHEMA}.com
       - PGADMIN_DEFAULT_PASSWORD=${DB_PWD}
