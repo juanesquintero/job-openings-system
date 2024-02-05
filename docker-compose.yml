@@ -40,7 +40,7 @@ services:
     image: dpage/pgadmin4
     restart: unless-stopped
     environment:
-      - PGADMIN_DEFAULT_EMAIL=admin${DB_SCHEMA}.com
+      - PGADMIN_DEFAULT_EMAIL=admin@${DB_SCHEMA}.com
       - PGADMIN_DEFAULT_PASSWORD=${DB_PWD}
     ports:
       - 8080:80
