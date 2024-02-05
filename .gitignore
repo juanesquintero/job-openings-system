@@ -4,3 +4,4 @@ lib
 .pyc
 *.zip
 .DS_Store
+lambda_function
