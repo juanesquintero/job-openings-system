@@ -6,24 +6,46 @@ services:
       context: .
       dockerfile: ./Dockerfile
     image: sgc-api:1.0.0
+    restart: unless-stopped
     volumes:
       - ./:/code
     env_file:
       - .env
     ports:
-      - "8000:80"
-    restart: unless-stopped
+      - 8000:80
     command: uvicorn main:app --reload --host 0.0.0.0 --port 80
 
-  sqlitebrowser:
-    image: lscr.io/linuxserver/sqlitebrowser:latest
-    container_name: sgc-sqlitebrowser
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Bogota
-    volumes:
-      - ./db:/config
-    ports:
-      - 3000:3000
+  db:
+    container_name: sgc-db
+    image: postgres:16.1
     restart: unless-stopped
+    environment:
+      - DB_HOST=${DB_HOST}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PWD}
+      - POSTGRES_DB=${DB_SCHEMA}
+    volumes:
+      - ./db/postgres_data:/var/lib/postgresql/data
+      - ./db/sql/creates.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      # - ./db/sql/inserts.sql:/docker-entrypoint-initdb.d/fill_tables.sql
+    ports:
+      - 5432:5432
+    networks:
+      sgc-net:
+        aliases:
+          - db-host
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@${DB_SCHEMA}.com
+      - PGADMIN_DEFAULT_PASSWORD=${DB_PWD}
+    ports:
+      - 8080:80
+    networks:
+      - sgc-net
+
+networks:
+  sgc-net:

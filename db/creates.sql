@@ -17,10 +17,10 @@ CREATE TABLE perfiles (
 	PRIMARY KEY( candidato , rasgo , fecha)
 );
 
--- -- For perfiles(fk_Perfil_Candidatos)
--- ALTER TABLE perfiles ADD
--- 	CONSTRAINT fk_Perfil_Candidatos
--- 	FOREIGN KEY ( candidato )
--- 	REFERENCES candidatos ( correo )
--- 	ON DELETE CASCADE
---     ON UPDATE CASCADE;
+-- For perfiles(fk_Perfil_Candidatos)
+ALTER TABLE perfiles ADD
+	CONSTRAINT fk_Perfil_Candidatos
+	FOREIGN KEY ( candidato )
+	REFERENCES candidatos ( correo )
+	ON DELETE CASCADE
+    ON UPDATE CASCADE;
