@@ -6,6 +6,11 @@ class Settings(BaseSettings):
 
     model_config = SettingsConfigDict(env_file=".env")
 
+    db_host: str
+    db_user: str
+    db_pwd: str
+    db_schema: str
+
 
 app_description = '''
 Sistema de Gestion de Convocatorias. API 🚀

@@ -13,6 +13,8 @@ services:
       - .env
     ports:
       - 8000:80
+    networks:
+      - sgc-net
     command: uvicorn main:app --reload --host 0.0.0.0 --port 80
 
   db:
@@ -36,9 +38,8 @@ services:
           - db-host
 
   pgadmin:
-    container_name: pgadmin
-    image: dpage/pgadmin4
-    restart: unless-stopped
+    container_name: sgc-pgadmin
+    image: dpage/pgadmin4:8.2
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@${DB_SCHEMA}.com
       - PGADMIN_DEFAULT_PASSWORD=${DB_PWD}
