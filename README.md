@@ -1,15 +1,12 @@
-Commands to deploy on AWS Lambda
+Commands to generate AWS Lambda function zip
 
-    pip install -t lib -r requirements.txt
+    # Install/Generate dependencies packages
+    python3.12 -m pip  install --platform manylinux2014_x86_64 -t lib -r requirements.txt --only-binary=:all: --upgrade;
 
-    (cd lib; zip ../lambda_function.zip -r .)
+    # Compress dependencies packages
+    (cd lib; zip ../lambda_function.zip -r .);
 
-    mv lambda_function.zip api/ && cd api
-
-    zip lambda_function.zip -u ./*.py
-
-    mv lambda_function.zip ../
-
-    cd ..
+    # Compress the source code
+    (cd api; zip ../lambda_function.zip -u ./*.py);
 
 
