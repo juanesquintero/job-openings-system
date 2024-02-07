@@ -38,7 +38,7 @@ services:
           - db-host
 
   pgadmin:
-    container_name: pgadmin
+    container_name: sgc-pgadmin
     image: dpage/pgadmin4:8.2
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@${DB_SCHEMA}.com
