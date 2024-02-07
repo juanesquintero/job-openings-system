@@ -1,6 +1,7 @@
 from typing import Annotated
 import models
 import schemas
+from mangum import Mangum
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
@@ -8,6 +9,8 @@ from db import SessionLocal
 from config import APP_CONFIG
 
 app = FastAPI(**APP_CONFIG)
+handler = Mangum(app)
+
 
 # App origins access
 origins = ['*']
