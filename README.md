@@ -10,3 +10,12 @@ Commands to generate AWS Lambda function zip
     (cd api; zip ../lambda_function.zip -u ./*.py);
 
 
+
+Videos for AWS deployment
+
+    AWS Lambda function
+    https://youtu.be/7-CvGFJNE_o
+
+    AWS RDS database
+    https://youtu.be/I_fTQTsz2nQ
+
