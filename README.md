@@ -1,21 +1,35 @@
-Commands to generate AWS Lambda function zip
-
-    # Install/Generate dependencies packages
-    python3.12 -m pip  install --platform manylinux2014_x86_64 -t lib -r requirements.txt --only-binary=:all: --upgrade;
-
-    # Compress dependencies packages
-    (cd lib; zip ../lambda_function.zip -r .);
-
-    # Compress the source code
-    (cd api; zip ../lambda_function.zip -u ./*.py);
+# SGC API 
+## (Sistema de Gestion de Convocatorias)
 
 
+## AWS deployment
 
-Videos for AWS deployment
+### Lambda function zip
 
-    AWS Lambda function
-    https://youtu.be/7-CvGFJNE_o
+Commands to generate 
 
-    AWS RDS database
-    https://youtu.be/I_fTQTsz2nQ
+Install/Generate dependencies packages
+```bash
+$ python3.12 -m pip  install --platform manylinux2014_x86_64 -t lib -r requirements.txt --only-binary=:all: --upgrade;
+```
+
+Compress dependencies packages
+```bash
+$ (cd lib; zip ../lambda_function.zip -r .);
+```
+
+Compress the source code
+```bash
+$ (cd api; zip ../lambda_function.zip -u ./*.py);
+```
+### Documentation Videos
+
+AWS Lambda function Tutorial:
+
+https://youtu.be/7-CvGFJNE_o
+
+
+AWS RDS database Tutorial:
+
+https://youtu.be/I_fTQTsz2nQ
 
