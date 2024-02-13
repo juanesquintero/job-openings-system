@@ -10,9 +10,9 @@ stages:
 
 variables:
   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
-  AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-  AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-  AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+  AWS_KEY: $AWS_ACCESS_KEY_ID
+  AWS_SECRET: $AWS_SECRET_ACCESS_KEY
+  AWS_REGION: $AWS_DEFAULT_REGION
 
 cache:
   paths:
@@ -36,7 +36,7 @@ lambda-fuction-build:
   artifacts:
     paths:
       - lambda_function.zip
-    expire_in: 1 day
+    expire_in: 1 hour
 
 aws-lambda-deploy:
   stage: deploy
@@ -45,14 +45,14 @@ aws-lambda-deploy:
     entrypoint: ["/bin/bash", "-c"]
   script:
     - echo "Logging into AWS..."
-    - echo "AWS_DEFAULT_REGION"
-    - echo $AWS_DEFAULT_REGION
-    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-    - aws configure set default.region $AWS_DEFAULT_REGION
+    - rm -rf ~/.aws/configure
+    - aws configure set aws_access_key_id $AWS_KEY
+    - aws configure set aws_secret_access_key $AWS_SECRET
+    - aws configure set default.region $AWS_REGION
+    - aws configure set default.output json
     - echo "Deploying to AWS Lambda..."
     - >
-      aws lambda update-function-code --function-name sgc-api --zip-file fileb://lambda_function.zip --region $AWS_DEFAULT_REGION
+      aws lambda update-function-code --function-name sgc-api --zip-file fileb://lambda_function.zip --region $AWS_REGION
   when: manual
 
 .global_rules:
