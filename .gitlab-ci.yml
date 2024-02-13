@@ -36,7 +36,6 @@ build:
   artifacts:
     paths:
       - lambda_function.zip
-      - lib
     expire_in: 1 day
 
 deploy:
@@ -46,12 +45,12 @@ deploy:
     entrypoint: ["/bin/bash", "-c"]
   script:
     - echo "Logging into AWS..."
-    # - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-    # - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-    # - aws configure set default.region $AWS_DEFAULT_REGION
-    # - echo "Deploying to AWS Lambda..."
-    # - >
-    #   aws lambda update-function-code --function-name sgc-lambda --zip-file fileb://lambda_function.zip --region $AWS_DEFAULT_REGION
+    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+    - aws configure set default.region $AWS_DEFAULT_REGION
+    - echo "Deploying to AWS Lambda..."
+    - >
+      aws lambda update-function-code --function-name sgc-lambda --zip-file fileb://lambda_function.zip --region $AWS_DEFAULT_REGION
   when: manual
 
 .global_rules:
