@@ -29,10 +29,13 @@ build:
     - echo "Building app..."
     - >
       pip install --platform manylinux2014_x86_64 -t lib -r requirements.txt --only-binary=:all: --upgrade
-    - echo "Zipping packages..."
-    - cd lib && zip ../lambda_function.zip -r . && cd ..
-    - echo "Zipping source code..."
-    - cd api && zip ../lambda_function.zip -ur ./*.py && cd ..
+    - zip lambda_function.zip -r lib/.
+    - zip lambda_function.zip -u $CI_PROJECT_DIR/api/*.py
+  artifacts:
+    paths:
+      - lambda_function.zip
+      - lib
+    expire_in: 1 day
 
 deploy:
   stage: deploy
