@@ -1,3 +1,9 @@
+# Gitlab CI/CD Variables needed for this pipeline
+
+# AWS_ACCESS_KEY_ID
+# AWS_SECRET_ACCESS_KEY
+# AWS_DEFAULT_REGION
+
 stages:
   - build
   - deploy
@@ -20,7 +26,7 @@ build:
   stage: build
   image: python:3.12
   script:
-    - echo "\nBuilding app...\n"
+    - echo "Building app..."
 
 deploy:
   stage: deploy
@@ -28,8 +34,6 @@ deploy:
   script:
     - echo "Deploying to AWS Lambda..."
   when: manual
-  only:
-    - main
 
 .global_rules:
   rules:
