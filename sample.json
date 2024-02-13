@@ -1,0 +1,90 @@
+{
+    "nombre": "Antonio Jesús Banegas Luna",
+    "correo": "ajbanegas@gmail.com",
+    "perfil_tecnico": {
+      "Programacion_y_Codificacion": {"calificacion": 8, "justificacion": "Sólida comprensión de varios lenguajes de programación y principios de OOP."},
+      "Resolucion_de_Problemas": {"calificacion": 7, "justificacion": "Experiencia en resolver problemas complejos con margen de mejora en enfoques innovadores."},
+      "Diseño_de_Software": {"calificacion": 6, "justificacion": "Buen entendimiento con necesidad de más experiencia en patrones de diseño avanzados."},
+      "Conocimiento_de_Herramientas_y_Tecnologias": {"calificacion": 8, "justificacion": "Amplia experiencia con herramientas y tecnologías actuales."},
+      "Gestion_de_Versiones_y_Control_de_Codigo": {"calificacion": 7, "justificacion": "Competente en sistemas de control de versiones."},
+      "Pruebas_y_Depuracion": {"calificacion": 7, "justificacion": "Buenas habilidades en pruebas y depuración con margen de mejora en pruebas de integración complejas."}
+    },
+    "perfil_psicologico": {
+      "Resiliencia": {"calificacion": 9, "justificacion": "Fuerte capacidad para adaptarse y superar desafíos con actitud positiva."},
+      "Colaboracion_y_Comunicacion": {"calificacion": 8, "justificacion": "Habilidades eficaces de trabajo en equipo y comunicación."},
+      "Pensamiento_Analitico": {"calificacion": 7, "justificacion": "Buena capacidad analítica con potencial para desarrollo."},
+      "Creatividad_e_Innovacion": {"calificacion": 6, "justificacion": "Demuestra creatividad con necesidad de expandirse en innovación."},
+      "Habilidad_para_Aprender_Continuamente": {"calificacion": 8, "justificacion": "Fuerte disposición para el aprendizaje y actualización tecnológica."},
+      "Gestion_del_Tiempo_y_Priorizacion": {"calificacion": 7, "justificacion": "Eficaz en gestión del tiempo y habilidad para priorizar en entornos dinámicos."}
+    }
+  }
+
+  {
+    "nombre": "Antonio Jesús Banegas Luna",
+    "correo": "ajbanegas@gmail.com",
+    "perfil_tecnico": [
+      {
+        "rasgo": "Programación y Codificación",
+        "calificación": 9,
+        "justificación": "Experiencia sólida en programación y codificación, destacando en desarrollo J2EE y mantenimiento de sistemas."
+      },
+      {
+        "rasgo": "Resolución de Problemas",
+        "calificación": 8,
+        "justificación": "Buenas habilidades de resolución de problemas en análisis y diseño de sistemas."
+      },
+      {
+        "rasgo": "Diseño de Software",
+        "calificación": 7,
+        "justificación": "Participación en diseño y arquitectura de aplicaciones, mostrando comprensión de estos conceptos."
+      },
+      {
+        "rasgo": "Conocimiento de Herramientas y Tecnologías",
+        "calificación": 8,
+        "justificación": "Amplios conocimientos en diversas herramientas y tecnologías, incluyendo J2EE y aplicaciones web."
+      },
+      {
+        "rasgo": "Gestión de Versiones y Control de Código",
+        "calificación": 7,
+        "justificación": "Experiencia sugiere familiaridad con sistemas de control de versiones."
+      },
+      {
+        "rasgo": "Pruebas y Depuración",
+        "calificación": 7,
+        "justificación": "Competencias en pruebas y depuración sugeridas por experiencia en desarrollo y mantenimiento."
+      }
+    ],
+    "perfil_psicologico": [
+      {
+        "rasgo": "Resiliencia",
+        "calificación": 9,
+        "justificación": "Capacidad demostrada para enfrentar y superar desafíos, adaptándose al cambio."
+      },
+      {
+        "rasgo": "Colaboración y Comunicación",
+        "calificación": 8,
+        "justificación": "Buena comunicación y enfoque en el trabajo en equipo expresado en el ensayo."
+      },
+      {
+        "rasgo": "Pensamiento Analítico",
+        "calificación": 8,
+        "justificación": "Enfoque analítico hacia los desafíos y cambios en la industria del software."
+      },
+      {
+        "rasgo": "Creatividad e Innovación",
+        "calificación": 7,
+        "justificación": "Interés en la innovación y evolución tecnológica."
+      },
+      {
+        "rasgo": "Habilidad para Aprender Continuamente",
+        "calificación": 9,
+        "justificación": "Compromiso constante con el aprendizaje y actualización en su campo."
+      },
+      {
+        "rasgo": "Gestión del Tiempo y Priorización",
+        "calificación": 7,
+        "justificación": "Trayectoria sugiere capacidad para manejar tiempo y prioridades."
+      }
+    ]
+  }
+  
