@@ -27,6 +27,7 @@ build:
   image: python:3.12
   script:
     - echo "Building app..."
+    - apt-get update -yqq
     - apt-get install zip -yqq
     - >
       pip install --platform manylinux2014_x86_64 -t lib -r requirements.txt --only-binary=:all: --upgrade
