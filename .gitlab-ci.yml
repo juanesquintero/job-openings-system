@@ -20,11 +20,7 @@ cache:
     - venv/
 
 before_script:
-  # Config AWS CLI auth
-  - echo "Logging into AWS..."
-  - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-  - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-  - aws configure set default.region $AWS_DEFAULT_REGION
+  - echo "Starting pipeline..."
 
 build:
   stage: build
@@ -46,7 +42,14 @@ deploy:
   stage: deploy
   image: python:3.12
   script:
+    - pip install awscli
+    - echo "Logging into AWS..."
+    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+    - aws configure set default.region $AWS_DEFAULT_REGION
     - echo "Deploying to AWS Lambda..."
+    - >
+      aws lambda update-function-code --function-name sgc-lambda --zip-file fileb://lambda_function.zip --region $AWS_DEFAULT_REGION
   when: manual
 
 .global_rules:
