@@ -1,0 +1,36 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+  AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+  AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+
+cache:
+  paths:
+    - .cache/pip
+    - venv/
+
+before_script:
+  - echo "Starting pipeline..."
+
+build:
+  stage: build
+  image: python:3.12
+  script:
+    - echo "\nBuilding app...\n"
+
+deploy:
+  stage: deploy
+  image: python:3.12
+  script:
+    - echo "Deploying to AWS Lambda..."
+  when: manual
+  only:
+    - main
+
+.global_rules:
+  rules:
+    - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
