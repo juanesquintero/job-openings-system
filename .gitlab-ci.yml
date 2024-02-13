@@ -31,8 +31,10 @@ lambda-fuction-build:
     - apt-get install zip -yqq
     - >
       pip install --platform manylinux2014_x86_64 -t lib -r requirements.txt --only-binary=:all: --upgrade
-    - zip lambda_function.zip -r lib/.
-    - zip lambda_function.zip -u $CI_PROJECT_DIR/api/*.py
+    - cd lib
+    - zip lambda_function.zip -r .
+    - cd $CI_PROJECT_DIR/api
+    - zip lambda_function.zip -u ./*.py
   artifacts:
     paths:
       - lambda_function.zip
