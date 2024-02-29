@@ -13,4 +13,3 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 # Expose port
 EXPOSE 80
-WORKDIR /code/api
