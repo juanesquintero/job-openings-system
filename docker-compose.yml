@@ -51,9 +51,6 @@ services:
 
   gpt:
     container_name: sgc-gpt
-    build:
-      context: .
-      dockerfile: ./Dockerfile
     image: sgc-api:1.0.0
     restart: unless-stopped
     volumes:
@@ -63,7 +60,7 @@ services:
     ports:
       - 9000:80
     working_dir: /code/gpt
-    command: pip install -r requirements.txt && uvicorn main:app --reload --host 0.0.0.0 --port 80
+    entrypoint: /code/gpt/entrypoint.sh
 
 networks:
   sgc-net:
