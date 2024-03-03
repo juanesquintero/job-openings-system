@@ -22,7 +22,7 @@ cache:
 before_script:
   - echo "Starting pipeline..."
 
-lambda-fuction-build:
+lambda-fuctions-build:
   stage: build
   image: python:3.12-slim
   script:
@@ -32,15 +32,22 @@ lambda-fuction-build:
     - >
       pip install --platform manylinux2014_x86_64 -t lib -r requirements.txt --only-binary=:all: --upgrade
     - cd lib
-    - zip $CI_PROJECT_DIR/lambda_function.zip -r .
+    - zip $CI_PROJECT_DIR/api_lambda_function.zip -r .
     - cd $CI_PROJECT_DIR/api
-    - zip $CI_PROJECT_DIR/lambda_function.zip -u ./*.py
+    - zip $CI_PROJECT_DIR/api_lambda_function.zip -u ./*.py
+    - >
+      pip install --platform manylinux2014_x86_64 -t lib -r gpt/requirements.txt --only-binary=:all: --upgrade
+    - cd lib
+    - zip $CI_PROJECT_DIR/gpt_lambda_function.zip -r .
+    - cd $CI_PROJECT_DIR/gpt
+    - zip $CI_PROJECT_DIR/gpt_lambda_function.zip -u ./*.py
   artifacts:
     paths:
-      - lambda_function.zip
+      - api_lambda_function.zip
+      - gpt_lambda_function.zip
     expire_in: 1 hour
 
-aws-lambda-deploy:
+aws-lambdas-deploy:
   stage: deploy
   image:
     name: amazon/aws-cli:2.15.19
@@ -54,7 +61,9 @@ aws-lambda-deploy:
     - aws configure set default.output json
     - echo "Deploying to AWS Lambda..."
     - >
-      aws lambda update-function-code --function-name sgc-api --zip-file fileb://lambda_function.zip --region $AWS_REGION
+      aws lambda update-function-code --function-name sgc-api --zip-file fileb://api_lambda_function.zip --region $AWS_REGION
+    - >
+      aws lambda update-function-code --function-name sgc-gpt --zip-file fileb://gpt_lambda_function.zip --region $AWS_REGION
   when: manual
 
 .global_rules:
