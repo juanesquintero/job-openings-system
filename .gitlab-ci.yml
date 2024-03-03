@@ -31,16 +31,17 @@ lambda-fuctions-build:
     - apt-get install zip -yqq
     - >
       pip install --platform manylinux2014_x86_64 -t lib -r requirements.txt --only-binary=:all: --upgrade
-    - cd lib
-    - zip $CI_PROJECT_DIR/api_lambda_function.zip -r .
-    - cd $CI_PROJECT_DIR/api
-    - zip $CI_PROJECT_DIR/api_lambda_function.zip -u ./*.py
+      cd lib
+      zip $CI_PROJECT_DIR/api_lambda_function.zip -r .
+      cd $CI_PROJECT_DIR/api
+      zip $CI_PROJECT_DIR/api_lambda_function.zip -u ./*.py
     - >
+      cd $CI_PROJECT_DIR
       pip install --platform manylinux2014_x86_64 -t lib -r gpt/requirements.txt --only-binary=:all: --upgrade
-    - cd lib
-    - zip $CI_PROJECT_DIR/gpt_lambda_function.zip -r .
-    - cd $CI_PROJECT_DIR/gpt
-    - zip $CI_PROJECT_DIR/gpt_lambda_function.zip -u ./*.py
+      cd lib
+      zip $CI_PROJECT_DIR/gpt_lambda_function.zip -r .
+      cd $CI_PROJECT_DIR/gpt
+      zip $CI_PROJECT_DIR/gpt_lambda_function.zip -u ./*.py
   artifacts:
     paths:
       - api_lambda_function.zip
