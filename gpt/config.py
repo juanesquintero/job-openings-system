@@ -3,11 +3,10 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     app_name: str = "SGC GPT"
-
     model_config = SettingsConfigDict(env_file=".env")
 
-    openai_api_key: str
-    openai_assistant_id: str
+    openai_api_key: str = ''
+    openai_assistant_id: str = ''
 
 
 app_description = '''
