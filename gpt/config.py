@@ -26,5 +26,6 @@ APP_CONFIG = {
             'name': 'gpt',
             'description': 'Operaciones con el asistente GPT del SGC.',
         },
-    ]
+    ],
+    "swagger_ui_parameters": {"syntaxHighlight": False, "displayRequestDuration": True},
 }
