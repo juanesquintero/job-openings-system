@@ -5,3 +5,4 @@ lib
 *.zip
 .DS_Store
 lambda_function
+settings.json
