@@ -62,5 +62,22 @@ services:
     working_dir: /code/gpt
     entrypoint: /code/gpt/entrypoint.sh
 
+  web:
+    container_name: sgc-web
+    restart: on-failure
+    image: sgc-web_dev:1.0.0
+    build:
+      context: ./web/
+      target: development
+      dockerfile: ./Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./web:/usr/code
+      - /usr/code/node_modules
+    depends_on:
+      - api
+    command: npm run dev
+
 networks:
   sgc-net:
