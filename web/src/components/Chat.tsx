@@ -1,6 +1,6 @@
 // src/Chat.tsx
 import React, { useState } from "react";
-import { Message } from "@/shared/types";
+import { Message } from "../shared/types";
 
 const Chat: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
