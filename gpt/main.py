@@ -1,7 +1,7 @@
 import openai
 from time import sleep
 from mangum import Mangum
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from config import Settings, APP_CONFIG
@@ -45,6 +45,24 @@ async def start_conversation() -> dict:
     return {"thread_id": thread.id}
 
 
+@app.post("/upload-files/",  tags=['gpt'])
+async def upload_files(essay: UploadFile = File(...), cv: UploadFile = File(...)):
+    essay_content = await essay.read()
+    cv_content = await cv.read()
+
+    # Send the files to the Assistant
+
+    # with open(f'uploads/{essay.filename}', 'wb') as f:
+    #     f.write(essay_content)
+    # with open(f'uploads/{cv.filename}', 'wb') as f:
+    #     f.write(cv_content)
+
+    return {
+        "essay": essay.filename,
+        "cv": cv.filename,
+    }
+
+
 @app.post(path='/chat', tags=['gpt'])
 async def chat(data: ChatData):
     thread_id = data.thread_id
@@ -57,7 +75,8 @@ async def chat(data: ChatData):
     client.beta.threads.messages.create(
         thread_id=thread_id,
         role="user",
-        content=prompt_msg
+        content=prompt_msg,
+
     )
     # Run the Assistant
     run = client.beta.threads.runs.create(
