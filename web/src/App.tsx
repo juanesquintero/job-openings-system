@@ -1,7 +1,7 @@
 import cvLogo from "./assets/cv.svg";
 import chatLogo from "../public/chat.svg";
 import "./App.css";
-import Chat from "./components/Chat";
+import Chat from "./components/Chat/Chat";
 
 function App() {
   return (
