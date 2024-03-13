@@ -1,4 +1,4 @@
-# SGC API 
+# Job Openings System (SGC)
 ## (Sistema de Gestion de Convocatorias)
 
 
