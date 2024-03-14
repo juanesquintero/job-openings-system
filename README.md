@@ -1,6 +1,8 @@
 # Job Openings System (SGC)
-## (Sistema de Gestion de Convocatorias)
+### (Sistema de Gestion de Convocatorias)
 
+
+<hr>
 
 ## AWS deployment
 
