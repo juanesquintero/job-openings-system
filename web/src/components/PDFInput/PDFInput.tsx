@@ -6,6 +6,7 @@ type PDFInputProps = {
   attachedFile: File | null;
   setAttachedFile: (file: File | null) => void;
 };
+
 export const PDFInput: React.FC<PDFInputProps> = ({
   attachedFile,
   setAttachedFile,
@@ -28,7 +29,7 @@ export const PDFInput: React.FC<PDFInputProps> = ({
         />
       </label>
       {attachedFile && (
-        <div className="flex items-center justify-center bg-white px-2 rounded-lg shadow ml-1">
+        <div className="flex items-center justify-center px-2 rounded-lg shadow ml-1">
           <DocumentIcon className="h-6 w-6 text-red-500" />
           <span className="ml-1 text-sm">
             <p className="font-medium truncate w-24" title={attachedFile?.name}>
