@@ -35,7 +35,9 @@ export const Message: React.FC<IMessage> = ({
     </span>
 
     <div className={MsgBoxStyles[sender as Sender]}>
-      <p className={`${MsgStyles[sender as Sender]} text-white py-1 px-2 w-fit`}>
+      <p
+        className={`${MsgStyles[sender as Sender]} text-white py-1 px-2 w-fit`}
+      >
         {text}
       </p>
     </div>
