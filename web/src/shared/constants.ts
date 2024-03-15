@@ -4,8 +4,8 @@ export const MsgBoxStyles = {
 }
 
 export const MsgStyles = {
-    bot: "rounded-e-full rounded-es-full text-left bg-blue-500",
-    user: "rounded-s-full rounded-ee-full text-right bg-green-500 ml-auto",
+    bot: "rounded-e-xl rounded-es-xl text-left bg-blue-500",
+    user: "rounded-s-xl rounded-ee-xl text-right bg-green-500 ml-auto",
 }
 
 export const UserStyles = {
