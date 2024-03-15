@@ -45,7 +45,7 @@ async def start_conversation() -> dict:
     return {"thread_id": thread.id}
 
 
-@app.post("/upload-files/",  tags=['gpt'])
+@app.post(path='/upload-files',  tags=['gpt'])
 async def upload_files(essay: UploadFile = File(...), cv: UploadFile = File(...)):
     essay_content = await essay.read()
     cv_content = await cv.read()
