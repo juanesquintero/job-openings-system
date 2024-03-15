@@ -10,7 +10,7 @@ export const Message: React.FC<IMessage> = ({
   time,
   text,
 }: IMessage) => (
-  <div className="py-3">
+  <div className="py-3 px-2">
     <span key={id} className={UserStyles[sender as Sender]}>
       <i className="h-5 w-5 m-2">
         {sender === "user" ? (
