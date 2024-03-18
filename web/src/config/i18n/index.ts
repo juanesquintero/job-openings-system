@@ -1,6 +1,7 @@
 import i18n from 'i18next';
 import en from './langs/en';
 import es from './langs/es';
+import pt from './langs/pt';
 
 import { initReactI18next } from 'react-i18next';
 import Backend from 'i18next-http-backend';
@@ -14,6 +15,7 @@ i18n
 		resources: {
 			en: { ...en },
 			es: { ...es },
+			pt: { ...pt },
 		},
 		fallbackLng: 'es',
 		interpolation: {
