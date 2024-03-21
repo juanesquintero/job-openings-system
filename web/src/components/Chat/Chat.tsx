@@ -16,7 +16,7 @@ const Chat: React.FC = () => {
     const newMessage: IMessage = {
       id: Date.now(),
       text: input,
-      sender: "bot",
+      sender: "user",
       time: new Date(),
     };
 
