@@ -3,25 +3,69 @@ import { IMessage } from "../../shared/types";
 import { Message } from "../Message/Message";
 import { PDFInput } from "../PDFInput/PDFInput";
 import { ArrowUpIcon } from "@heroicons/react/24/solid";
+import { fecthData, postData } from "../../shared/utils";
+import { Loading } from "../Loading/Loading";
 
 const Chat: React.FC = () => {
   const [messages, setMessages] = useState<IMessage[]>([]);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState<string>("");
+
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const [thread, setThread] = useState<string | null>(
+    localStorage.getItem("thread") ?? null
+  );
   const [attachedFile, setAttachedFile] = useState<File | null>(null);
 
-  const sendMessage = (e: React.FormEvent) => {
+  const setThreadID = (threadID?: string | null) => {
+    if (threadID) {
+      setThread(threadID);
+      localStorage.setItem("thread", threadID);
+    }
+  };
+
+  const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
 
-    const newMessage: IMessage = {
+    setLoading(true);
+    setInput("");
+    const newMessages = [];
+
+    const userMsg: IMessage = {
       id: Date.now(),
-      text: input,
+      text: input.trim(),
       sender: "user",
       time: new Date(),
     };
+    newMessages.push(userMsg);
 
-    setMessages([...messages, newMessage]);
-    setInput("");
+    if (messages?.length === 0) {
+      const response = await fecthData({ endpoint: "/start" });
+      setThreadID(response?.thread_id);
+    }
+
+    if (thread) {
+      const response = await postData({
+        endpoint: "/chat",
+        body: {
+          thread_id: thread,
+          message: userMsg?.text,
+        },
+      });
+      const botMsg: IMessage = {
+        id: Date.now(),
+        text: response?.response?.trim(),
+        sender: "bot",
+        time: new Date(),
+      };
+      newMessages.push(botMsg);
+    } else {
+      alert("Please start a conversation thread...˝");
+    }
+
+    setMessages([...messages, ...newMessages]);
+    setLoading(false);
   };
 
   return (
@@ -37,6 +81,7 @@ const Chat: React.FC = () => {
 
         <input
           type="text"
+          disabled={loading}
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Type a message..."
@@ -45,6 +90,7 @@ const Chat: React.FC = () => {
 
         <button
           type="submit"
+          disabled={loading}
           className="px-2 py-1 rounded-md border-2 border-inherit hover:bg-gray-200"
         >
           <ArrowUpIcon className="h-6 w-6 text-black" />
