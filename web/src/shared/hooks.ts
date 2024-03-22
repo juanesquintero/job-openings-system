@@ -1,23 +1,8 @@
-import axios from 'axios';
-import env from '../config/enviroment';
-
-interface IPost {
-    endpoint: string;
-    body: Record<string, string | number | boolean | null | undefined>;
-}
+import { IPost } from "./types";
+import { postData } from "./utils";
 
 const usePost = async ({ endpoint, body }: IPost) => {
-    try {
-        const { data } = await axios.post(env.apiBaseURL + endpoint, body, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        return data;
-    } catch (err) {
-        console.error('HTTP Post Error', err);
-        return err;
-    }
+  return await postData({ endpoint, body });
 };
 
 export default usePost;
