@@ -7,7 +7,10 @@ export interface IMessage {
 
 export type Sender = "user" | "bot";
 
-export interface IPost {
+export interface IGet {
     endpoint: string;
+}
+
+export interface IPost extends IGet {
     body: Record<string, string | number | boolean | Date | null | undefined> | unknown;
 }
