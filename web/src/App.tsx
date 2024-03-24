@@ -6,7 +6,7 @@ import Chat from "./components/Chat/Chat";
 function App() {
   return (
     <>
-      <div className="flex items-center justify-center w-full">
+      <div className="flex items-center justify-center w-1/3">
         <a href="https://vitejs.dev" target="_blank">
           <img src={chatLogo} className="logo" alt="Vite logo" />
         </a>
@@ -16,7 +16,7 @@ function App() {
       </div>
       <h1 className="text-5xl">SGC Chat</h1>
       <div className="card">
-        <Chat></Chat>
+        <Chat />
       </div>
     </>
   );
