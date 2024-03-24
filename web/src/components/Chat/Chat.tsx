@@ -76,6 +76,8 @@ const Chat: React.FC = () => {
         ))}
       </ul>
 
+      <span className="flex justify-center">{loading && <Loading size="l"/>}</span>
+
       <form onSubmit={sendMessage} className="flex mt-5">
         <PDFInput {...{ attachedFile, setAttachedFile }} />
 
@@ -93,7 +95,11 @@ const Chat: React.FC = () => {
           disabled={loading}
           className="px-2 py-1 rounded-md border-2 border-inherit hover:bg-gray-200"
         >
-          <ArrowUpIcon className="h-6 w-6 text-black" />
+          {loading ? (
+            <Loading size="s"/>
+          ) : (
+            <ArrowUpIcon className="h-6 w-6 text-black" />
+          )}
         </button>
       </form>
     </div>
