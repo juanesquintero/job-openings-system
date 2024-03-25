@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IMessage } from "../../shared/types";
+import { IMessage, MsgContent } from "../../shared/types";
 import { Message } from "../Message/Message";
 import { PDFInput } from "../PDFInput/PDFInput";
 import { ArrowUpIcon } from "@heroicons/react/24/solid";
@@ -15,7 +15,7 @@ const Chat: React.FC = () => {
   const [thread, setThread] = useState<string | null>(
     localStorage.getItem("thread") ?? null
   );
-  const [attachedFile, setAttachedFile] = useState<File | null>(null);
+  const [file, setFile] = useState<File | null>(null);
 
   const setThreadID = (threadID?: string | null) => {
     if (threadID) {
@@ -24,17 +24,14 @@ const Chat: React.FC = () => {
     }
   };
 
-  const sendMessage = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim()) return;
-
+  const sendChat = async (msg: MsgContent) => {
     setLoading(true);
-    setInput("");
+
     const newMessages = [];
 
     const userMsg: IMessage = {
       id: Date.now(),
-      text: input.trim(),
+      text: msg.label,
       sender: "user",
       time: new Date(),
     };
@@ -50,7 +47,7 @@ const Chat: React.FC = () => {
         endpoint: "/chat",
         body: {
           thread_id: thread,
-          message: userMsg?.text,
+          message: msg.content,
         },
       });
       const botMsg: IMessage = {
@@ -68,18 +65,55 @@ const Chat: React.FC = () => {
     setLoading(false);
   };
 
+  const sendFile = async () => {
+    if (!file) return;
+
+    setFile(null);
+
+    const formData = new FormData();
+    formData.append("file", file as File);
+
+    const msgContent: MsgContent = {
+      label: file?.name || "File Name",
+      content: formData || "",
+    };
+
+    sendChat(msgContent);
+  };
+
+  const sendMessage = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (file) return sendFile();
+
+    const msgText = input.trim();
+
+    if (msgText) return;
+
+    setInput("");
+
+    const msgContent: MsgContent = {
+      label: msgText,
+      content: msgText,
+    };
+
+    sendChat(msgContent);
+  };
+
   return (
-    <div className="p-4">
+    <div className="p-4 max-w-lg">
       <ul>
         {messages.map((msg: IMessage) => (
           <Message key={msg?.id} {...msg}></Message>
         ))}
       </ul>
 
-      <span className="flex justify-center">{loading && <Loading size="l"/>}</span>
+      <span className="flex justify-center">
+        {loading && <Loading size="l" />}
+      </span>
 
       <form onSubmit={sendMessage} className="flex mt-5">
-        <PDFInput {...{ attachedFile, setAttachedFile }} />
+        <PDFInput attachedFile={file} setAttachedFile={setFile} />
 
         <input
           type="text"
@@ -96,7 +130,7 @@ const Chat: React.FC = () => {
           className="px-2 py-1 rounded-md border-2 border-inherit hover:bg-gray-200"
         >
           {loading ? (
-            <Loading size="s"/>
+            <Loading size="s" />
           ) : (
             <ArrowUpIcon className="h-6 w-6 text-black" />
           )}
