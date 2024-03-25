@@ -5,6 +5,11 @@ export interface IMessage {
     time?: Date;
 }
 
+export interface MsgContent {
+    label: string;
+    content: string | FormData;
+}
+
 export type Sender = "user" | "bot";
 
 export interface IGet {
