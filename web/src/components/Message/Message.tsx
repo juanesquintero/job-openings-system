@@ -29,7 +29,10 @@ export const Message: React.FC<IMessage> = ({
           {sender}
         </p>
         <time className="text-xs font-normal text-gray-500 dark:text-gray-400">
-          {time?.toLocaleTimeString()}
+          {time?.toLocaleTimeString("en-US", {
+            hour: "numeric",
+            minute: "numeric",
+          })}
         </time>
       </span>
     </span>
