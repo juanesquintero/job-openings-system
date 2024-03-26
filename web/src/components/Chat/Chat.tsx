@@ -88,7 +88,7 @@ const Chat: React.FC = () => {
 
     const msgText = input.trim();
 
-    if (msgText) return;
+    if (!msgText) return;
 
     setInput("");
 
@@ -101,7 +101,7 @@ const Chat: React.FC = () => {
   };
 
   return (
-    <div className="p-4 max-w-lg">
+    <div className="p-4 max-w-xl">
       <ul>
         {messages.map((msg: IMessage) => (
           <Message key={msg?.id} {...msg}></Message>
