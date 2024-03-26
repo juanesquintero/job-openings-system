@@ -1,7 +1,7 @@
 import openai
 from time import sleep
 from mangum import Mangum
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from config import Settings, APP_CONFIG
@@ -45,21 +45,28 @@ async def start_conversation() -> dict:
     return {"thread_id": thread.id}
 
 
-@app.post(path='/upload-files',  tags=['gpt'])
-async def upload_files(essay: UploadFile = File(...), cv: UploadFile = File(...)):
-    essay_content = await essay.read()
-    cv_content = await cv.read()
+@app.post("/chat/file", tags=["gpt"])
+async def upload_file(thread_id: str, file: UploadFile = File(...)):
+    if not thread_id:
+        raise HTTPException(status_code=400, detail="Missing thread_id")
+
+    file_content = await file.read()
+
+    file_obj = client.files.create(
+        file=file_content,
+        purpose="fine-tune"
+    )
+
+    print(file_obj.filename, flush=True)
+
+    file_obj = client.files.retrieve(file.filename)
+
+    print(file_obj.filename, flush=True)
 
     # Send the files to the Assistant
-
-    # with open(f'uploads/{essay.filename}', 'wb') as f:
-    #     f.write(essay_content)
-    # with open(f'uploads/{cv.filename}', 'wb') as f:
-    #     f.write(cv_content)
-
     return {
-        "essay": essay.filename,
-        "cv": cv.filename,
+        "file_name": file_obj.filename,
+        "file_content": file_obj.content,
     }
 
 
