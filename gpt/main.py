@@ -57,11 +57,11 @@ async def upload_file(thread_id: str, file: UploadFile = File(...)):
         purpose="fine-tune"
     )
 
-    print(file_obj.filename, flush=True)
+    # print(file_obj.filename, flush=True)
 
     file_obj = client.files.retrieve(file.filename)
 
-    print(file_obj.filename, flush=True)
+    # print(file_obj.filename, flush=True)
 
     # Send the files to the Assistant
     return {
