@@ -7,3 +7,6 @@ lib
 lambda_function
 settings.json
 .requirements_installed
+
+*.cv.json
+cvs/*
